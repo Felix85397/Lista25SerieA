@@ -372,6 +372,8 @@
 </style>
 </head>
 <body>
+    <div id="sign-in-container" style="display: flex; justify-content: center; align-items: center; min-height: 85vh; width: 100%; box-sizing: border-box;"></div>
+    <div id="app-content" style="display: none;">
 
 <header class="letterhead">
   <div class="letterhead-inner">
@@ -857,10 +859,99 @@ document.getElementById('cutoffInput').addEventListener('change', (e)=>{
 });
 
 // ---------- INIT ----------
-(async function init(){
+async function init(){
   await loadState();
   render();
-})();
+}
+window.initApp = init;
 </script>
+
+    </div>
+
+    <!-- Script di Clerk per la protezione degli accessi -->
+    <script>
+        // La tua Publishable Key
+        const clerkPubKey = "pk_test_cnVsaW5nLW1heWZseS03MS5jbGVyay5hY2NvdW50cy5kZXYk";
+
+        const script = document.createElement('script');
+        script.setAttribute('data-clerk-publishable-key', clerkPubKey);
+        script.async = true;
+        script.src = "https://ruling-mayfly-71.clerk.accounts.dev/npm/@clerk/clerk-js@latest/dist/clerk.browser.js";
+        script.crossOrigin = "anonymous";
+        
+        script.addEventListener('error', function () {
+            console.error("Impossibile caricare il file JS di Clerk da CDN (es. bloccato da AdBlocker, estensioni di privacy o problemi di rete).");
+        });
+
+        script.addEventListener('load', async function () {
+            try {
+                const localizationObj = {
+                    signIn: {
+                        start: {
+                            title: "Area Riservata",
+                            subtitle: "Inserisci l'email associata al tuo abbonamento a RedBlack Insights.",
+                            actionText: " ",
+                            actionLink: " "
+                        },
+                        emailCode: {
+                            title: "Controlla la tua email",
+                            subtitle: "Abbiamo inviato un codice di verifica a",
+                            formTitle: "Codice di verifica",
+                            resendButton: "Invia di nuovo il codice"
+                        }
+                    },
+                    formFieldLabel__emailAddress: "Indirizzo Email",
+                    formFieldLabel__emailAddress_code: "Codice a 6 cifre",
+                    formButtonPrimary: "Continua",
+                    formFieldInputPlaceholder__emailAddress: "es. nome.cognome@email.com",
+                    dividerText: "oppure"
+                };
+
+                // Inizializzazione di Clerk con la localizzazione globale e i redirect globali
+                await window.Clerk.load({
+                    localization: localizationObj,
+                    signInForceRedirectUrl: window.location.href,
+                    signUpForceRedirectUrl: window.location.href
+                });
+
+                // Listener per intercettare il login in tempo reale senza dover aspettare il reload
+                window.Clerk.addListener(function (state) {
+                    if (state.user) {
+                        document.getElementById('sign-in-container').style.display = 'none';
+                        document.getElementById('app-content').style.display = 'block';
+
+                        // Inizializza l'app ora che il contenitore è visibile!
+                        if (typeof window.initApp === 'function') {
+                            window.initApp();
+                        }
+                    }
+                });
+
+                if (window.Clerk.user) {
+                    // L'utente è autorizzato: nascondo il login e mostro il contenuto della web app
+                    document.getElementById('sign-in-container').style.display = 'none';
+                    document.getElementById('app-content').style.display = 'block';
+
+                    // Inizializza l'app ora che il contenitore è visibile!
+                    if (typeof window.initApp === 'function') {
+                        window.initApp();
+                    }
+                } else {
+                    // L'utente NON è autorizzato: mostro il modulo di login nel div apposito
+                    const signInDiv = document.getElementById('sign-in-container');
+                    window.Clerk.mountSignIn(signInDiv, {
+                        forceRedirectUrl: window.location.href,
+                        fallbackRedirectUrl: window.location.href,
+                        afterSignInUrl: window.location.href,
+                        afterSignUpUrl: window.location.href,
+                        localization: localizationObj
+                    });
+                }
+            } catch (err) {
+                console.error("Errore durante l'inizializzazione di Clerk: " + (err ? (err.message || err.stack || JSON.stringify(err) || String(err)) : "Errore sconosciuto"), err);
+            }
+        });
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>
