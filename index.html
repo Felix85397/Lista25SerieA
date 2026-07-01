@@ -609,8 +609,32 @@ function fmtDate(iso){
   return `${d}/${m}/${y}`;
 }
 
+// Ordine di reparto standard: portieri, difensori, terzini, mediani/centrocampisti,
+// esterni, trequartisti, ali, punte. Ruoli non riconosciuti finiscono in coda.
+function positionRank(pos){
+  const p = (pos || "").toLowerCase();
+  if(p.includes("portiere")) return 0;
+  if(p.includes("difensore")) return 1;
+  if(p.includes("terzino sinistro")) return 2;
+  if(p.includes("terzino destro")) return 3;
+  if(p.includes("terzino")) return 2.5;
+  if(p.includes("mediano")) return 4;
+  if(p.includes("centrocampista")) return 5;
+  if(p.includes("esterno")) return 6;
+  if(p.includes("trequartista")) return 7;
+  if(p.includes("ala sinistra")) return 8;
+  if(p.includes("ala destra")) return 9;
+  if(p.includes("ala")) return 8.5;
+  if(p.includes("punta") || p.includes("attaccante")) return 10;
+  return 99;
+}
+
 function render(){
   document.getElementById('cutoffInput').value = cutoffDate;
+
+  // raggruppa i calciatori per reparto (portieri, difensori, centrocampisti, attaccanti...)
+  over22.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+  under22.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
 
   // sort over22 by category priority then keep insertion order otherwise
   const over22Body = document.getElementById('over22Body');
