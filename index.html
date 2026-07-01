@@ -363,6 +363,34 @@
   .toolbar button:hover{background:var(--ink);color:var(--paper);}
   .toolbar button.danger:hover{background:var(--bad);border-color:var(--bad);}
 
+  .tabnav{
+    display:flex;
+    gap:0;
+    margin:26px 0 0;
+    border-bottom:2px solid var(--ink);
+  }
+  .tab-btn{
+    font-family:var(--font-display);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    font-size:13px;
+    background:var(--paper-dim);
+    border:1px solid var(--ink);
+    border-bottom:none;
+    color:var(--slate);
+    padding:10px 18px;
+    cursor:pointer;
+    margin-bottom:-2px;
+    margin-right:4px;
+  }
+  .tab-btn:hover{color:var(--ink);}
+  .tab-btn.active{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .tab-btn.active:hover{color:var(--paper);}
+
   @media (max-width:640px){
     table.roster{font-size:12px;}
     table.roster th:nth-child(3), table.roster td:nth-child(3){display:none;} /* nazionalità hidden on mobile */
@@ -392,6 +420,12 @@
 </div></div>
 
 <div class="wrap">
+  <div class="tabnav">
+    <button class="tab-btn active" id="tabBtnSerieA" onclick="switchView('serieA')">Serie A · Tetto alle Rose</button>
+    <button class="tab-btn" id="tabBtnUefa" onclick="switchView('uefa')">UEFA · List A / List B</button>
+  </div>
+
+  <div id="viewSerieA">
 
   <section class="section">
     <div class="section-head">
@@ -531,46 +565,154 @@
     <strong>Nota metodologica.</strong> I dati anagrafici (numero, ruolo, data di nascita, nazionalità) sono tratti dalla rosa AC Milan stagione 2026/27 pubblicata su Transfermarkt. La qualifica di "formato nel club" o "formato in Italia" richiede la verifica puntuale della storia dei tesseramenti (36 mesi anche non continuativi, o tre intere stagioni sportive, tra i 15 e i 21 anni), dato non sempre desumibile da fonti aperte: le assegnazioni precompilate (Gabbia formato nel vivaio rossonero; De Winter, Ricci e Pietro Terracciano formati in club italiani diversi dal Milan; Filippo Terracciano, Bennacer e Bondo fuori progetto) vanno confermate sui tesseramenti FIGC effettivi prima dell'invio dell'elenco alla Lega. Ogni calciatore è riassegnabile in qualsiasi momento tramite il menu a tendina "Categoria". Anche se non specificamente indicato nel regolamento, per prassi ogni U22 finisce a prescindere tra gli U22 e non tra i formati nel club o in Italia (in questi panieri ci finiscono soltanto gli over 22).
   </div>
 
+  </div><!-- /viewSerieA -->
+
+  <div id="viewUEFA" style="display:none">
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Regole List A / List B — UEFA</h2>
+      <span class="tag">Art. 31-32 Regolamento UEFA Champions/Europa/Conference League</span>
+    </div>
+    <div class="rules">
+      <div class="rule-card">
+        <div class="num">01 — List A</div>
+        <p>Massimo <strong>25</strong> calciatori. Almeno <strong>8</strong> posti riservati a "locally trained players", di cui non più di <strong>4</strong> "association-trained". Per differenza, almeno 4 devono essere "club-trained". <em>Se il requisito non è raggiunto, la lista si riduce di conseguenza.</em></p>
+      </div>
+      <div class="rule-card">
+        <div class="num">02 — Club-trained</div>
+        <p>Tesserato con il club attuale tra i 15 e i 21 anni, per 3 stagioni intere anche non continuative o 36 mesi.</p>
+      </div>
+      <div class="rule-card">
+        <div class="num">03 — Association-trained</div>
+        <p>Tesserato, nella stessa finestra 15-21 anni, con uno o più club affiliati alla stessa federazione del club attuale (per il Milan, la FIGC), per 3 stagioni intere o 36 mesi.</p>
+      </div>
+      <div class="rule-card">
+        <div class="num">04 — Portieri e List B</div>
+        <p>Almeno <strong>2</strong> portieri in List A. Almeno <strong>3</strong> portieri considerando List A e List B insieme.</p>
+        <p>La List B non ha limite numerico. Ammessi i nati dal 1° gennaio 2005 in poi con specifici requisiti di continuità di tesseramento dai 15 anni (2 anni continuativi, oppure 3 anni con un solo prestito nella stessa federazione, oppure 2 anni per i sedicenni). Il requisito di continuità <strong>non</strong> è calcolato automaticamente: l'idoneità va spuntata manualmente per ciascun calciatore.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Stato della lista UEFA</h2>
+      <span class="tag" id="lastUpdatedUefa">aggiornato in tempo reale</span>
+    </div>
+    <div class="gauges">
+      <div class="gauge" id="ug-libero">
+        <div class="label">Liberi (List A)</div>
+        <div class="value"><span id="uv-libero">0</span><span class="of">/17</span></div>
+        <div class="bar"><i id="ub-libero" style="width:0%"></i></div>
+      </div>
+      <div class="gauge" id="ug-club">
+        <div class="label">Club-trained</div>
+        <div class="value"><span id="uv-club">0</span><span class="of">/4</span></div>
+        <div class="bar"><i id="ub-club" style="width:0%"></i></div>
+        <div class="note" id="un-club"></div>
+      </div>
+      <div class="gauge" id="ug-association">
+        <div class="label">Association-trained</div>
+        <div class="value"><span id="uv-association">0</span><span class="of">/4</span></div>
+        <div class="bar"><i id="ub-association" style="width:0%"></i></div>
+        <div class="note" id="un-association"></div>
+      </div>
+      <div class="gauge" id="ug-tot">
+        <div class="label">Totale List A</div>
+        <div class="value"><span id="uv-tot">0</span><span class="of">/25</span></div>
+        <div class="bar"><i id="ub-tot" style="width:0%"></i></div>
+      </div>
+      <div class="gauge" id="ug-gkA">
+        <div class="label">Portieri in List A</div>
+        <div class="value"><span id="uv-gkA">0</span><span class="of">min. 2</span></div>
+      </div>
+      <div class="gauge" id="ug-gkTot">
+        <div class="label">Portieri List A + B</div>
+        <div class="value"><span id="uv-gkTot">0</span><span class="of">min. 3</span></div>
+      </div>
+      <div class="gauge">
+        <div class="label">Fuori progetto</div>
+        <div class="value"><span id="uv-fuori">0</span><span class="of">esclusi da List A</span></div>
+      </div>
+    </div>
+    <div class="alert" id="alertBoxUefa"><strong>Lista non conforme.</strong> <span id="alertTextUefa"></span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Rosa completa <span class="tag" id="avgAgeUefa" style="font-family:var(--font-mono);font-size:12px;text-transform:none;letter-spacing:normal;color:var(--slate);margin-left:8px;"></span></h2>
+      <span class="tag">categoria List A o spunta List B, per ciascun calciatore</span>
+    </div>
+    <div class="zone">
+      <div class="zone-title">Rosa <span class="count" id="cnt-uefa">0 calciatori</span></div>
+      <table class="roster" id="tblUefa">
+        <thead>
+          <tr>
+            <th>Calciatore</th>
+            <th>Ruolo</th>
+            <th style="width:110px">Nazionalità</th>
+            <th style="width:120px">Data di nascita</th>
+            <th style="width:48px">Età</th>
+            <th style="width:190px">Categoria List A</th>
+            <th style="width:80px">List B</th>
+          </tr>
+        </thead>
+        <tbody id="uefaBody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--slate);margin-top:10px;">L'anagrafica dei calciatori è condivisa con la scheda Serie A: per aggiungere, rimuovere o modificare un calciatore usa le tabelle nella scheda "Serie A · Tetto alle Rose". Qui trovi la stessa rosa completa, ordinata per reparto, con la sola classificazione UEFA.</p>
+  </section>
+
+  <div class="disclaimer">
+    <strong>Nota metodologica UEFA.</strong> Le categorie "club-trained" e "association-trained" seguono lo stesso schema 15-21 anni / 36 mesi già impiegato per il Tetto alle Rose italiano, ma vanno verificate separatamente: un calciatore può essere formato nel club ai fini FIGC e non esserlo ai fini UEFA se, per esempio, ha cambiato squadra tra i 15 e i 21 anni restando comunque nella stessa federazione. Il requisito di continuità di tesseramento per la List B non è calcolato automaticamente dallo strumento: la spunta "List B" è manuale e va impostata caso per caso sulla base dei tesseramenti effettivi. A differenza degli Under 22 del Tetto alle Rose, che sono esclusi dai panieri "formati" in modo automatico e non negoziabile in base alla sola data di nascita, l'assegnazione a List B in ambito UEFA non è un vincolo di sistema: un calciatore giovane e idoneo può essere iscritto direttamente in List A, dove spesso conviene inserirlo proprio per riempire la quota obbligatoria di club-trained o association-trained senza consumare uno dei 17 slot liberi. La spunta "List B" in questo strumento riflette quindi una scelta strategica del club che va valutata caso per caso, non un automatismo regolamentare. Lo strumento verifica solo la composizione numerica della lista, non le finestre temporali di deposito: i depositi di List A sono scaglionati per turno di qualificazione, play-off e fase campionato, e sono ammesse sostituzioni straordinarie per infortunio lungo (portiere: 30 giorni; giocatore di movimento: 60 giorni, massimo uno) o per cessione di portieri dopo la giornata 6. Nessuna di queste scadenze o sostituzioni è modellizzata nel calcolo di conformità qui sopra.
+  </div>
+
+  </div><!-- /viewUEFA -->
+
 </div>
 
 <script>
 // ---------- DATA MODEL ----------
 let cutoffDate = "2025-12-31";
+let currentView = "serieA";
+let serieAConforme = true;
+let uefaConforme = true;
 
 const initialOver22 = [
-  {number:16, name:"Mike Maignan", pos:"Portiere", nat:"Francia", dob:"1995-07-03", cat:"libero"},
-  {number:1,  name:"Pietro Terracciano", pos:"Portiere", nat:"Italia", dob:"1990-03-08", cat:"italia"},
-  {number:31, name:"Strahinja Pavlović", pos:"Difensore centrale", nat:"Serbia", dob:"2001-05-24", cat:"libero"},
-  {number:5,  name:"Koni De Winter", pos:"Difensore centrale", nat:"Belgio", dob:"2002-06-12", cat:"italia"},
-  {number:23, name:"Fikayo Tomori", pos:"Difensore centrale", nat:"Inghilterra", dob:"1997-12-19", cat:"libero"},
-  {number:46, name:"Matteo Gabbia", pos:"Difensore centrale", nat:"Italia", dob:"1999-10-21", cat:"club"},
-  {number:"-",name:"Filippo Terracciano", pos:"Difensore centrale", nat:"Italia", dob:"2003-02-08", cat:"fp"},
-  {number:2,  name:"Pervis Estupiñán", pos:"Terzino sinistro", nat:"Ecuador", dob:"1998-01-21", cat:"libero"},
-  {number:30, name:"Ardon Jashari", pos:"Mediano", nat:"Svizzera", dob:"2002-07-30", cat:"libero"},
-  {number:19, name:"Youssouf Fofana", pos:"Mediano", nat:"Francia", dob:"1999-01-10", cat:"libero"},
-  {number:4,  name:"Samuele Ricci", pos:"Mediano", nat:"Italia", dob:"2001-08-21", cat:"italia"},
-  {number:"-",name:"Ismaël Bennacer", pos:"Mediano", nat:"Algeria", dob:"1997-12-01", cat:"fp"},
-  {number:12, name:"Adrien Rabiot", pos:"Centrocampista", nat:"Francia", dob:"1995-04-03", cat:"libero"},
-  {number:"-",name:"Yunus Musah", pos:"Centrocampista", nat:"Stati Uniti", dob:"2002-11-29", cat:"libero"},
-  {number:8,  name:"Ruben Loftus-Cheek", pos:"Centrocampista", nat:"Inghilterra", dob:"1996-01-23", cat:"libero"},
-  {number:"-",name:"Warren Bondo", pos:"Centrocampista", nat:"Francia", dob:"2003-09-15", cat:"fp"},
-  {number:56, name:"Alexis Saelemaekers", pos:"Esterno di destra", nat:"Belgio", dob:"1999-06-27", cat:"libero"},
-  {number:10, name:"Rafael Leão", pos:"Ala sinistra", nat:"Portogallo", dob:"1999-06-10", cat:"libero"},
-  {number:11, name:"Christian Pulisic", pos:"Ala destra", nat:"Stati Uniti", dob:"1998-09-18", cat:"libero"},
-  {number:"-",name:"Samuel Chukwueze", pos:"Ala destra", nat:"Nigeria", dob:"1999-05-22", cat:"libero"},
-  {number:"-",name:"Gonçalo Ramos", pos:"Punta centrale", nat:"Portogallo", dob:"2001-06-20", cat:"libero"},
-  {number:18, name:"Christopher Nkunku", pos:"Punta centrale", nat:"Francia", dob:"1997-11-14", cat:"libero"},
-  {number:7,  name:"Santiago Gimenez", pos:"Punta centrale", nat:"Messico", dob:"2001-04-18", cat:"libero"},
+  {number:16, name:"Mike Maignan", pos:"Portiere", nat:"Francia", dob:"1995-07-03", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:1,  name:"Pietro Terracciano", pos:"Portiere", nat:"Italia", dob:"1990-03-08", cat:"italia", uefaCat:"association", uefaListB:false},
+  {number:31, name:"Strahinja Pavlović", pos:"Difensore centrale", nat:"Serbia", dob:"2001-05-24", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:5,  name:"Koni De Winter", pos:"Difensore centrale", nat:"Belgio", dob:"2002-06-12", cat:"italia", uefaCat:"association", uefaListB:false},
+  {number:23, name:"Fikayo Tomori", pos:"Difensore centrale", nat:"Inghilterra", dob:"1997-12-19", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:46, name:"Matteo Gabbia", pos:"Difensore centrale", nat:"Italia", dob:"1999-10-21", cat:"club", uefaCat:"club", uefaListB:false},
+  {number:"-",name:"Filippo Terracciano", pos:"Difensore centrale", nat:"Italia", dob:"2003-02-08", cat:"fp", uefaCat:"fuori", uefaListB:false},
+  {number:2,  name:"Pervis Estupiñán", pos:"Terzino sinistro", nat:"Ecuador", dob:"1998-01-21", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:30, name:"Ardon Jashari", pos:"Mediano", nat:"Svizzera", dob:"2002-07-30", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:19, name:"Youssouf Fofana", pos:"Mediano", nat:"Francia", dob:"1999-01-10", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:4,  name:"Samuele Ricci", pos:"Mediano", nat:"Italia", dob:"2001-08-21", cat:"italia", uefaCat:"association", uefaListB:false},
+  {number:"-",name:"Ismaël Bennacer", pos:"Mediano", nat:"Algeria", dob:"1997-12-01", cat:"fp", uefaCat:"fuori", uefaListB:false},
+  {number:12, name:"Adrien Rabiot", pos:"Centrocampista", nat:"Francia", dob:"1995-04-03", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Yunus Musah", pos:"Centrocampista", nat:"Stati Uniti", dob:"2002-11-29", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:8,  name:"Ruben Loftus-Cheek", pos:"Centrocampista", nat:"Inghilterra", dob:"1996-01-23", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Warren Bondo", pos:"Centrocampista", nat:"Francia", dob:"2003-09-15", cat:"fp", uefaCat:"fuori", uefaListB:false},
+  {number:56, name:"Alexis Saelemaekers", pos:"Esterno di destra", nat:"Belgio", dob:"1999-06-27", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:10, name:"Rafael Leão", pos:"Ala sinistra", nat:"Portogallo", dob:"1999-06-10", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:11, name:"Christian Pulisic", pos:"Ala destra", nat:"Stati Uniti", dob:"1998-09-18", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Samuel Chukwueze", pos:"Ala destra", nat:"Nigeria", dob:"1999-05-22", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Gonçalo Ramos", pos:"Punta centrale", nat:"Portogallo", dob:"2001-06-20", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:18, name:"Christopher Nkunku", pos:"Punta centrale", nat:"Francia", dob:"1997-11-14", cat:"libero", uefaCat:"libero", uefaListB:false},
+  {number:7,  name:"Santiago Gimenez", pos:"Punta centrale", nat:"Messico", dob:"2001-04-18", cat:"libero", uefaCat:"libero", uefaListB:false},
 ];
 
 const initialUnder22 = [
-  {number:96, name:"Lorenzo Torriani", pos:"Portiere", nat:"Italia", dob:"2005-01-31"},
-  {number:27, name:"David Odogu", pos:"Difensore centrale", nat:"Germania", dob:"2006-06-03"},
-  {number:33, name:"Davide Bartesaghi", pos:"Terzino sinistro", nat:"Italia", dob:"2005-12-29"},
-  {number:24, name:"Zachary Athekame", pos:"Terzino destro", nat:"Svizzera", dob:"2004-12-13"},
-  {number:"-",name:"Kevin Zeroli", pos:"Centrocampista", nat:"Italia", dob:"2005-01-11"},
-  {number:"-",name:"Alphadjo Cissè", pos:"Trequartista", nat:"Italia", dob:"2006-10-22"},
-  {number:"-",name:"Francesco Camarda", pos:"Punta centrale", nat:"Italia", dob:"2008-03-10"},
+  {number:96, name:"Lorenzo Torriani", pos:"Portiere", nat:"Italia", dob:"2005-01-31", uefaCat:"libero", uefaListB:false},
+  {number:27, name:"David Odogu", pos:"Difensore centrale", nat:"Germania", dob:"2006-06-03", uefaCat:"libero", uefaListB:false},
+  {number:33, name:"Davide Bartesaghi", pos:"Terzino sinistro", nat:"Italia", dob:"2005-12-29", uefaCat:"libero", uefaListB:false},
+  {number:24, name:"Zachary Athekame", pos:"Terzino destro", nat:"Svizzera", dob:"2004-12-13", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Kevin Zeroli", pos:"Centrocampista", nat:"Italia", dob:"2005-01-11", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Alphadjo Cissè", pos:"Trequartista", nat:"Italia", dob:"2006-10-22", uefaCat:"libero", uefaListB:false},
+  {number:"-",name:"Francesco Camarda", pos:"Punta centrale", nat:"Italia", dob:"2008-03-10", uefaCat:"libero", uefaListB:false},
 ];
 
 let over22 = JSON.parse(JSON.stringify(initialOver22));
@@ -693,6 +835,7 @@ function render(){
   }
 
   computeDashboard();
+  renderUEFA();
   saveState();
 }
 
@@ -700,12 +843,12 @@ function reclassifyByAge(){
   // Move players between over22/under22 arrays if editing dob/cutoff changed their status
   const moveToUnder = [];
   over22 = over22.filter(p=>{
-    if(ageAt(p.dob, cutoffDate) < 22){ moveToUnder.push({number:p.number,name:p.name,pos:p.pos,nat:p.nat,dob:p.dob,_id:p._id}); return false; }
+    if(ageAt(p.dob, cutoffDate) < 22){ moveToUnder.push({...p}); return false; }
     return true;
   });
   const moveToOver = [];
   under22 = under22.filter(p=>{
-    if(ageAt(p.dob, cutoffDate) >= 22){ moveToOver.push({number:p.number,name:p.name,pos:p.pos,nat:p.nat,dob:p.dob,cat:'libero',_id:p._id}); return false; }
+    if(ageAt(p.dob, cutoffDate) >= 22){ moveToOver.push({...p, cat: p.cat || 'libero'}); return false; }
     return true;
   });
   under22 = under22.concat(moveToUnder);
@@ -737,22 +880,16 @@ function computeDashboard(){
   if(tot > 25) problems.push(`il totale in lista è ${tot}, superiore al limite di 25.`);
 
   const alertBox = document.getElementById('alertBox');
-  const stamp = document.getElementById('stamp');
-  const stampStatus = document.getElementById('stampStatus');
-  const stampSub = document.getElementById('stampSub');
 
   if(problems.length){
     alertBox.classList.add('show');
     document.getElementById('alertText').textContent = problems.join(' ');
-    stamp.classList.remove('ok'); stamp.classList.add('bad');
-    stampStatus.textContent = "Non conforme";
-    stampSub.textContent = "Tetto alle Rose";
   } else {
     alertBox.classList.remove('show');
-    stamp.classList.remove('bad'); stamp.classList.add('ok');
-    stampStatus.textContent = "Conforme";
-    stampSub.textContent = "Tetto alle Rose";
   }
+
+  serieAConforme = problems.length === 0;
+  refreshStamp();
 }
 
 function setGauge(key, val, max){
@@ -763,6 +900,140 @@ function setGauge(key, val, max){
   gauge.classList.remove('warn','bad');
   if(val > max) gauge.classList.add('bad');
   else if(val === max) gauge.classList.add('warn');
+}
+
+function refreshStamp(){
+  const stamp = document.getElementById('stamp');
+  const stampStatus = document.getElementById('stampStatus');
+  const stampSub = document.getElementById('stampSub');
+  const conforme = currentView === 'uefa' ? uefaConforme : serieAConforme;
+  stampSub.textContent = currentView === 'uefa' ? "UEFA List A/B" : "Tetto alle Rose";
+  if(conforme){
+    stamp.classList.remove('bad'); stamp.classList.add('ok');
+    stampStatus.textContent = "Conforme";
+  } else {
+    stamp.classList.remove('ok'); stamp.classList.add('bad');
+    stampStatus.textContent = "Non conforme";
+  }
+}
+
+function switchView(view){
+  const serieA = document.getElementById('viewSerieA');
+  const uefa = document.getElementById('viewUEFA');
+  const btnSerieA = document.getElementById('tabBtnSerieA');
+  const btnUefa = document.getElementById('tabBtnUefa');
+  currentView = view === 'uefa' ? 'uefa' : 'serieA';
+  if(view === 'uefa'){
+    serieA.style.display = 'none';
+    uefa.style.display = 'block';
+    btnSerieA.classList.remove('active');
+    btnUefa.classList.add('active');
+  } else {
+    serieA.style.display = 'block';
+    uefa.style.display = 'none';
+    btnUefa.classList.remove('active');
+    btnSerieA.classList.add('active');
+  }
+  refreshStamp();
+}
+
+function renderUEFA(){
+  const combined = over22.concat(under22).sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+  const body = document.getElementById('uefaBody');
+  body.innerHTML = "";
+  combined.forEach(p=>{
+    const age = ageAt(p.dob, cutoffDate);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${p.name}</td>
+      <td>${p.pos}</td>
+      <td>${p.nat}</td>
+      <td>${fmtDate(p.dob)}</td>
+      <td class="age-badge">${age}</td>
+      <td>
+        <select onchange="updUefaField(${p._id},'uefaCat',this.value)" ${p.uefaListB?'disabled':''}>
+          <option value="libero" ${p.uefaCat==='libero'?'selected':''}>Libero</option>
+          <option value="club" ${p.uefaCat==='club'?'selected':''}>Club-trained</option>
+          <option value="association" ${p.uefaCat==='association'?'selected':''}>Association-trained</option>
+          <option value="fuori" ${p.uefaCat==='fuori'?'selected':''}>Fuori progetto</option>
+        </select>
+      </td>
+      <td style="text-align:center">
+        <input type="checkbox" ${p.uefaListB?'checked':''} onchange="updUefaField(${p._id},'uefaListB',this.checked)">
+      </td>
+    `;
+    body.appendChild(tr);
+  });
+
+  document.getElementById('cnt-uefa').textContent = combined.length + " calciatori";
+  if(combined.length){
+    const avg = combined.reduce((sum,p)=>sum+ageAt(p.dob, cutoffDate),0) / combined.length;
+    document.getElementById('avgAgeUefa').textContent = "età media " + avg.toFixed(1);
+  }
+
+  const listB = combined.filter(p=>p.uefaListB);
+  const listA = combined.filter(p=>!p.uefaListB);
+  const libero = listA.filter(p=>p.uefaCat==='libero').length;
+  const club = listA.filter(p=>p.uefaCat==='club').length;
+  const association = listA.filter(p=>p.uefaCat==='association').length;
+  const tot = listA.filter(p=>p.uefaCat!=='fuori').length;
+  const gkListA = listA.filter(p=>p.uefaCat!=='fuori' && (p.pos||"").toLowerCase().includes('portiere')).length;
+  const gkListB = listB.filter(p=>(p.pos||"").toLowerCase().includes('portiere')).length;
+  const gkTot = gkListA + gkListB;
+
+  setGaugeUefa('libero', libero, 17);
+  setGaugeUefa('club', club, 4);
+  setGaugeUefa('association', association, 4);
+  setGaugeUefa('tot', tot, 25);
+  document.getElementById('uv-gkA').textContent = gkListA;
+  document.getElementById('uv-gkTot').textContent = gkTot;
+  document.getElementById('uv-fuori').textContent = listA.filter(p=>p.uefaCat==='fuori').length;
+
+  const gA = document.getElementById('ug-gkA');
+  const gT = document.getElementById('ug-gkTot');
+  gA.classList.toggle('bad', gkListA < 2);
+  gT.classList.toggle('bad', gkTot < 3);
+
+  document.getElementById('un-club').textContent = club < 4 ? `${4-club} slot vacanti (ammesso)` : "";
+  document.getElementById('un-association').textContent = association < 4 ? `${4-association} slot vacanti (ammesso)` : "";
+
+  const problems = [];
+  if(libero > 17) problems.push(`i calciatori "Liberi" in List A sono ${libero}, superano il tetto di 17.`);
+  if(club > 4) problems.push(`i "Club-trained" sono ${club}, superano il tetto di 4.`);
+  if(association > 4) problems.push(`gli "Association-trained" sono ${association}, superano il tetto di 4.`);
+  if(tot > 25) problems.push(`il totale List A è ${tot}, superiore al limite di 25.`);
+  if(gkListA < 2) problems.push(`i portieri in List A sono ${gkListA}, sotto il minimo di 2.`);
+  if(gkTot < 3) problems.push(`i portieri complessivi (List A + List B) sono ${gkTot}, sotto il minimo di 3.`);
+
+  const alertBox = document.getElementById('alertBoxUefa');
+
+  if(problems.length){
+    alertBox.classList.add('show');
+    document.getElementById('alertTextUefa').textContent = problems.join(' ');
+  } else {
+    alertBox.classList.remove('show');
+  }
+
+  uefaConforme = problems.length === 0;
+  refreshStamp();
+}
+
+function setGaugeUefa(key, val, max){
+  document.getElementById('uv-'+key).textContent = val;
+  const pct = Math.min(100, (val/max)*100);
+  document.getElementById('ub-'+key).style.width = pct+"%";
+  const gauge = document.getElementById('ug-'+key);
+  gauge.classList.remove('warn','bad');
+  if(val > max) gauge.classList.add('bad');
+  else if(val === max) gauge.classList.add('warn');
+}
+
+function updUefaField(id, field, value){
+  let p = over22.find(x=>x._id===id) || under22.find(x=>x._id===id);
+  if(!p) return;
+  p[field] = value;
+  renderUEFA();
+  saveState();
 }
 
 function updField(id, isUnder, field, value){
@@ -786,7 +1057,7 @@ function addPlayer(isUnder){
   const nat = document.getElementById(prefix+'-nat').value.trim();
   const dob = document.getElementById(prefix+'-dob').value;
   if(!name || !dob){ alert('Inserisci almeno nome e data di nascita.'); return; }
-  const newP = {number:"-", name, pos: pos||"—", nat: nat||"—", dob, _id: uidCounter++};
+  const newP = {number:"-", name, pos: pos||"—", nat: nat||"—", dob, _id: uidCounter++, uefaCat:"libero", uefaListB:false};
   if(!isUnder) newP.cat = 'libero';
   if(isUnder) under22.push(newP); else over22.push(newP);
   document.getElementById(prefix+'-name').value = "";
