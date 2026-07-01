@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista Ufficiale 25 — AC Milan 2026/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161513;
+    --milan-red:#C8102E;
+    --milan-red-dark:#8C0B20;
+    --paper:#F3EDDF;
+    --paper-dim:#E9E0CB;
+    --paper-line:#CBBFA0;
+    --gold:#AD8A3B;
+    --slate:#5B5648;
+    --ok:#2E5E3E;
+    --ok-bg:#E1EADB;
+    --warn:#8A5A16;
+    --warn-bg:#F3E4C4;
+    --bad:#8C0B20;
+    --bad-bg:#F1DCD8;
+    --font-display:'Oswald',sans-serif;
+    --font-body:'Source Serif 4',serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 700px at 85% -10%, rgba(200,16,46,0.05), transparent 60%),
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ===== LETTERHEAD ===== */
+  header.letterhead{
+    position:relative;
+    background:var(--ink);
+    color:var(--paper);
+    padding:26px 20px 22px;
+    margin-bottom:0;
+    overflow:visible;
+  }
+  header.letterhead::after{
+    content:"";
+    display:block;
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--milan-red) 0 22px, var(--ink) 22px 44px);
+  }
+  .letterhead-inner{max-width:1180px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--milan-red);
+    margin:0 0 8px;
+  }
+  h1.wordmark{
+    font-family:var(--font-display);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    font-size:clamp(28px,4.4vw,46px);
+    margin:0;
+    line-height:1;
+  }
+  h1.wordmark small{
+    display:block;
+    font-family:var(--font-body);
+    font-style:italic;
+    font-weight:400;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:15px;
+    color:#C9C3B4;
+    margin-top:6px;
+  }
+  .cutoff-box{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--paper);
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    padding:10px 14px;
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .cutoff-box input{
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid var(--milan-red);
+    font-family:var(--font-mono);
+    font-size:12px;
+    padding:4px 6px;
+    border-radius:2px;
+  }
+
+  /* ===== STAMP ===== */
+  .stamp-slot{position:relative;height:0;}
+  .stamp{
+    position:absolute;
+    right:20px;
+    top:-58px;
+    width:118px;height:118px;
+    border-radius:50%;
+    border:3px double var(--gold);
+    background:var(--paper);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    transform:rotate(-6deg);
+    box-shadow:0 6px 18px rgba(0,0,0,0.28);
+    transition:border-color .25s ease, color .25s ease;
+    z-index:5;
+  }
+  .stamp .status{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    line-height:1.15;
+  }
+  .stamp .sub{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:.08em;
+    margin-top:4px;
+    color:var(--slate);
+  }
+  .stamp.ok{border-color:var(--ok);}
+  .stamp.ok .status{color:var(--ok);}
+  .stamp.bad{border-color:var(--bad);}
+  .stamp.bad .status{color:var(--bad);}
+
+  /* ===== SECTION HEADERS ===== */
+  .section{margin-top:44px;}
+  .section-head{
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:8px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    font-size:19px;
+    margin:0;
+  }
+  .section-head .tag{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--slate);
+  }
+
+  /* ===== RULES ===== */
+  .rules{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1px;
+    background:var(--paper-line);
+    border:1px solid var(--paper-line);
+  }
+  .rule-card{background:var(--paper);padding:16px 18px;}
+  .rule-card .num{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--milan-red);
+    letter-spacing:.06em;
+  }
+  .rule-card p{
+    margin:6px 0 0;
+    font-size:13.5px;
+    color:var(--ink);
+  }
+  .rule-card p em{color:var(--slate);}
+
+  /* ===== DASHBOARD ===== */
+  .gauges{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+  }
+  .gauge{
+    background:var(--paper-dim);
+    border:1px solid var(--paper-line);
+    padding:14px 16px;
+    position:relative;
+  }
+  .gauge .label{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--slate);
+  }
+  .gauge .value{
+    font-family:var(--font-display);
+    font-size:30px;
+    font-weight:600;
+    margin-top:4px;
+  }
+  .gauge .value .of{font-size:16px;color:var(--slate);font-weight:400;}
+  .gauge .bar{height:4px;background:var(--paper-line);margin-top:10px;overflow:hidden;}
+  .gauge .bar i{display:block;height:100%;background:var(--ok);transition:width .25s ease, background .25s ease;}
+  .gauge.warn .value{color:var(--warn);}
+  .gauge.warn .bar i{background:var(--warn);}
+  .gauge.bad .value{color:var(--bad);}
+  .gauge.bad .bar i{background:var(--bad);}
+  .gauge .note{font-size:11.5px;color:var(--slate);margin-top:6px;}
+
+  .alert{
+    margin-top:14px;
+    padding:12px 16px;
+    border-left:4px solid var(--bad);
+    background:var(--bad-bg);
+    color:var(--bad);
+    font-size:13.5px;
+    display:none;
+  }
+  .alert.show{display:block;}
+  .alert strong{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.02em;font-size:12px;}
+
+  /* ===== TABLE ZONES ===== */
+  .zone{margin-bottom:26px;}
+  .zone-title{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:var(--font-display);
+    font-size:14px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    padding:8px 12px;
+    color:var(--paper);
+    background:var(--ink);
+  }
+  .zone-title .count{font-family:var(--font-mono);font-weight:400;font-size:12px;}
+  table.roster{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--paper);
+    font-size:13.5px;
+  }
+  table.roster th{
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--slate);
+    border-bottom:1px solid var(--ink);
+    padding:8px 8px;
+    font-weight:500;
+  }
+  table.roster td{
+    padding:6px 8px;
+    border-bottom:1px solid var(--paper-line);
+    vertical-align:middle;
+  }
+  table.roster tr:hover td{background:rgba(200,16,46,0.04);}
+  table.roster input[type="text"],
+  table.roster input[type="date"],
+  table.roster select{
+    font-family:var(--font-body);
+    font-size:13.5px;
+    border:1px solid transparent;
+    background:transparent;
+    padding:3px 4px;
+    width:100%;
+    color:var(--ink);
+    border-radius:2px;
+  }
+  table.roster select{font-family:var(--font-mono);font-size:12px;}
+  table.roster input:hover, table.roster select:hover{border-color:var(--paper-line);}
+  table.roster input:focus, table.roster select:focus{
+    outline:none;border-color:var(--milan-red);background:#fff;
+  }
+  .age-badge{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--slate);
+  }
+  .rm-btn{
+    background:none;border:none;color:var(--slate);cursor:pointer;
+    font-size:16px;line-height:1;padding:2px 6px;
+  }
+  .rm-btn:hover{color:var(--bad);}
+  .add-row{
+    display:flex;gap:8px;align-items:center;
+    padding:8px;
+    background:var(--paper-dim);
+    border-top:1px dashed var(--paper-line);
+  }
+  .add-row input{
+    font-family:var(--font-body);
+    font-size:13px;
+    border:1px solid var(--paper-line);
+    padding:5px 7px;
+    background:#fff;
+  }
+  .add-row input.name{flex:2;min-width:120px;}
+  .add-row input.pos{flex:1;min-width:80px;}
+  .add-row input.dob{flex:1;min-width:120px;}
+  .add-row input.nat{flex:1;min-width:80px;}
+  .add-btn{
+    font-family:var(--font-mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:7px 12px;
+    cursor:pointer;
+  }
+  .add-btn:hover{background:var(--milan-red);}
+
+  .cat-pill{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:10px;
+    padding:2px 6px;
+    border-radius:2px;
+  }
+  .cat-libero{background:#E4E1D6;color:var(--slate);}
+  .cat-club{background:var(--ok-bg);color:var(--ok);}
+  .cat-italia{background:#DCE4EF;color:#2C4B75;}
+  .cat-fp{background:#E9DCC8;color:var(--warn);}
+
+  /* footer / disclaimer */
+  .disclaimer{
+    margin-top:40px;
+    padding:16px 18px;
+    border-top:2px solid var(--ink);
+    font-size:12.5px;
+    color:var(--slate);
+  }
+  .disclaimer strong{color:var(--ink);}
+  .toolbar{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .toolbar button{
+    font-family:var(--font-mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    background:transparent;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    padding:8px 14px;
+    cursor:pointer;
+  }
+  .toolbar button:hover{background:var(--ink);color:var(--paper);}
+  .toolbar button.danger:hover{background:var(--bad);border-color:var(--bad);}
+
+  @media (max-width:640px){
+    table.roster{font-size:12px;}
+    table.roster th:nth-child(3), table.roster td:nth-child(3){display:none;} /* nazionalità hidden on mobile */
+    .stamp{width:96px;height:96px;top:-46px;right:14px;}
+    .stamp .status{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <div class="letterhead-inner">
+    <div>
+      <h1 class="wordmark">Lista dei 25<small>AC Milan — Stagione Sportiva 2026/27</small></h1>
+    </div>
+    <div class="cutoff-box">
+      DATA DI RIFERIMENTO U22
+      <input type="date" id="cutoffInput" value="2025-12-31">
+    </div>
+  </div>
+</header>
+<div class="stamp-slot"><div class="stamp" id="stamp">
+  <div class="status" id="stampStatus">—</div>
+  <div class="sub" id="stampSub">CALCOLO...</div>
+</div></div>
+
+<div class="wrap">
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Regole di composizione</h2>
+    </div>
+    <div class="rules">
+      <div class="rule-card">
+        <div class="num">01 — Liberi</div>
+        <p>Fino a <strong>17</strong> calciatori Over 22, senza vincoli di provenienza.</p>
+      </div>
+      <div class="rule-card">
+        <div class="num">02 — Formati nel club</div>
+        <p>Almeno <strong>4</strong> Over 22 tesserati a titolo definitivo per il Milan tra i 15 e i 21 anni, per almeno 36 mesi anche non continuativi (o 3 stagioni intere). <em>Se il requisito non è raggiunto, gli slot restano vacanti.</em></p>
+      </div>
+      <div class="rule-card">
+        <div class="num">03 — Formati in Italia</div>
+        <p>Almeno <strong>4</strong> Over 22 tesserati a titolo definitivo per uno o più club italiani tra i 15 e i 21 anni, per almeno 36 mesi (anche non continuativi) o 3 stagioni intere. <em>Idem, slot vacanti se non raggiunto.</em></p>
+      </div>
+      <div class="rule-card">
+        <div class="num">04 — Under 22 e seconda squadra</div>
+        <p>Gli Under 22 si aggregano senza limite numerico e a prescindere dal loro status formativo. I convocati in lista Milan Futuro non devono superare le 50 presenze in Serie A con la prima squadra.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Stato della lista</h2>
+      <span class="tag" id="lastUpdated">aggiornato in tempo reale</span>
+    </div>
+    <div class="gauges">
+      <div class="gauge" id="g-libero">
+        <div class="label">Liberi (Over 22)</div>
+        <div class="value"><span id="v-libero">0</span><span class="of">/17</span></div>
+        <div class="bar"><i id="b-libero" style="width:0%"></i></div>
+      </div>
+      <div class="gauge" id="g-club">
+        <div class="label">Formati nel club</div>
+        <div class="value"><span id="v-club">0</span><span class="of">/4</span></div>
+        <div class="bar"><i id="b-club" style="width:0%"></i></div>
+        <div class="note" id="n-club"></div>
+      </div>
+      <div class="gauge" id="g-italia">
+        <div class="label">Formati in Italia</div>
+        <div class="value"><span id="v-italia">0</span><span class="of">/4</span></div>
+        <div class="bar"><i id="b-italia" style="width:0%"></i></div>
+        <div class="note" id="n-italia"></div>
+      </div>
+      <div class="gauge" id="g-tot">
+        <div class="label">Totale in lista 25</div>
+        <div class="value"><span id="v-tot">0</span><span class="of">/25</span></div>
+        <div class="bar"><i id="b-tot" style="width:0%"></i></div>
+      </div>
+      <div class="gauge">
+        <div class="label">Under 22 aggregati</div>
+        <div class="value"><span id="v-u22">0</span><span class="of">senza limite</span></div>
+      </div>
+      <div class="gauge">
+        <div class="label">Fuori progetto / non in lista</div>
+        <div class="value"><span id="v-fp">0</span><span class="of">esclusi dai 25</span></div>
+      </div>
+    </div>
+    <div class="alert" id="alertBox"><strong>Lista non conforme.</strong> <span id="alertText"></span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Rosa Over 22 <span class="tag" id="avgAge" style="font-family:var(--font-mono);font-size:12px;text-transform:none;letter-spacing:normal;color:var(--slate);margin-left:8px;">età media —</span></h2>
+      <span class="tag">categoria assegnabile per ciascun calciatore</span>
+    </div>
+
+    <div class="zone">
+      <div class="zone-title">Over 22 <span class="count" id="cnt-over22">0 calciatori</span></div>
+      <table class="roster" id="tblOver22">
+        <thead>
+          <tr>
+            <th>Calciatore</th>
+            <th>Ruolo</th>
+            <th style="width:110px">Nazionalità</th>
+            <th style="width:120px">Data di nascita</th>
+            <th style="width:48px">Età</th>
+            <th style="width:190px">Categoria</th>
+            <th style="width:30px"></th>
+          </tr>
+        </thead>
+        <tbody id="over22Body"></tbody>
+      </table>
+      <div class="add-row">
+        <input class="name" placeholder="Nome calciatore" id="add22-name">
+        <input class="pos" placeholder="Ruolo" id="add22-pos">
+        <input class="nat" placeholder="Nazionalità" id="add22-nat">
+        <input class="dob" type="date" id="add22-dob">
+        <button class="add-btn" onclick="addPlayer(false)">+ Aggiungi</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Rosa aggiuntiva Under 22</h2>
+      <span class="tag">nessun limite numerico, aggregabile in ogni momento</span>
+    </div>
+    <div class="zone">
+      <div class="zone-title">Under 22 <span class="count" id="cnt-under22">0 calciatori</span></div>
+      <table class="roster" id="tblUnder22">
+        <thead>
+          <tr>
+            <th>Calciatore</th>
+            <th>Ruolo</th>
+            <th style="width:110px">Nazionalità</th>
+            <th style="width:120px">Data di nascita</th>
+            <th style="width:48px">Età</th>
+            <th style="width:30px"></th>
+          </tr>
+        </thead>
+        <tbody id="under22Body"></tbody>
+      </table>
+      <div class="add-row">
+        <input class="name" placeholder="Nome calciatore" id="addU-name">
+        <input class="pos" placeholder="Ruolo" id="addU-pos">
+        <input class="nat" placeholder="Nazionalità" id="addU-nat">
+        <input class="dob" type="date" id="addU-dob">
+        <button class="add-btn" onclick="addPlayer(true)">+ Aggiungi</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <button onclick="resetRoster()" class="danger">Ripristina rosa iniziale</button>
+    <button onclick="exportJson()">Esporta dati (.json)</button>
+    <button onclick="document.getElementById('importFile').click()">Importa dati (.json)</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importJson(event)">
+  </div>
+  <div class="alert" id="importAlert" style="border-left-color:var(--ok);background:var(--ok-bg);color:var(--ok);"></div>
+
+  <div class="disclaimer">
+    <strong>Nota metodologica.</strong> I dati anagrafici (numero, ruolo, data di nascita, nazionalità) sono tratti dalla rosa AC Milan stagione 2026/27 pubblicata su Transfermarkt. La qualifica di "formato nel club" o "formato in Italia" richiede la verifica puntuale della storia dei tesseramenti (36 mesi anche non continuativi, o tre intere stagioni sportive, tra i 15 e i 21 anni), dato non sempre desumibile da fonti aperte: le assegnazioni precompilate (Gabbia formato nel vivaio rossonero; De Winter, Ricci e Pietro Terracciano formati in club italiani diversi dal Milan; Filippo Terracciano, Bennacer e Bondo fuori progetto) vanno confermate sui tesseramenti FIGC effettivi prima dell'invio dell'elenco alla Lega. Ogni calciatore è riassegnabile in qualsiasi momento tramite il menu a tendina "Categoria". Anche se non specificamente indicato nel regolamento, per prassi ogni U22 finisce a prescindere tra gli U22 e non tra i formati nel club o in Italia (in questi panieri ci finiscono soltanto gli over 22).
+  </div>
+
+</div>
+
+<script>
+// ---------- DATA MODEL ----------
+let cutoffDate = "2025-12-31";
+
+const initialOver22 = [
+  {number:16, name:"Mike Maignan", pos:"Portiere", nat:"Francia", dob:"1995-07-03", cat:"libero"},
+  {number:1,  name:"Pietro Terracciano", pos:"Portiere", nat:"Italia", dob:"1990-03-08", cat:"italia"},
+  {number:31, name:"Strahinja Pavlović", pos:"Difensore centrale", nat:"Serbia", dob:"2001-05-24", cat:"libero"},
+  {number:5,  name:"Koni De Winter", pos:"Difensore centrale", nat:"Belgio", dob:"2002-06-12", cat:"italia"},
+  {number:23, name:"Fikayo Tomori", pos:"Difensore centrale", nat:"Inghilterra", dob:"1997-12-19", cat:"libero"},
+  {number:46, name:"Matteo Gabbia", pos:"Difensore centrale", nat:"Italia", dob:"1999-10-21", cat:"club"},
+  {number:"-",name:"Filippo Terracciano", pos:"Difensore centrale", nat:"Italia", dob:"2003-02-08", cat:"fp"},
+  {number:2,  name:"Pervis Estupiñán", pos:"Terzino sinistro", nat:"Ecuador", dob:"1998-01-21", cat:"libero"},
+  {number:30, name:"Ardon Jashari", pos:"Mediano", nat:"Svizzera", dob:"2002-07-30", cat:"libero"},
+  {number:19, name:"Youssouf Fofana", pos:"Mediano", nat:"Francia", dob:"1999-01-10", cat:"libero"},
+  {number:4,  name:"Samuele Ricci", pos:"Mediano", nat:"Italia", dob:"2001-08-21", cat:"italia"},
+  {number:"-",name:"Ismaël Bennacer", pos:"Mediano", nat:"Algeria", dob:"1997-12-01", cat:"fp"},
+  {number:12, name:"Adrien Rabiot", pos:"Centrocampista", nat:"Francia", dob:"1995-04-03", cat:"libero"},
+  {number:"-",name:"Yunus Musah", pos:"Centrocampista", nat:"Stati Uniti", dob:"2002-11-29", cat:"libero"},
+  {number:8,  name:"Ruben Loftus-Cheek", pos:"Centrocampista", nat:"Inghilterra", dob:"1996-01-23", cat:"libero"},
+  {number:"-",name:"Warren Bondo", pos:"Centrocampista", nat:"Francia", dob:"2003-09-15", cat:"fp"},
+  {number:56, name:"Alexis Saelemaekers", pos:"Esterno di destra", nat:"Belgio", dob:"1999-06-27", cat:"libero"},
+  {number:10, name:"Rafael Leão", pos:"Ala sinistra", nat:"Portogallo", dob:"1999-06-10", cat:"libero"},
+  {number:11, name:"Christian Pulisic", pos:"Ala destra", nat:"Stati Uniti", dob:"1998-09-18", cat:"libero"},
+  {number:"-",name:"Samuel Chukwueze", pos:"Ala destra", nat:"Nigeria", dob:"1999-05-22", cat:"libero"},
+  {number:"-",name:"Gonçalo Ramos", pos:"Punta centrale", nat:"Portogallo", dob:"2001-06-20", cat:"libero"},
+  {number:18, name:"Christopher Nkunku", pos:"Punta centrale", nat:"Francia", dob:"1997-11-14", cat:"libero"},
+  {number:7,  name:"Santiago Gimenez", pos:"Punta centrale", nat:"Messico", dob:"2001-04-18", cat:"libero"},
+];
+
+const initialUnder22 = [
+  {number:96, name:"Lorenzo Torriani", pos:"Portiere", nat:"Italia", dob:"2005-01-31"},
+  {number:27, name:"David Odogu", pos:"Difensore centrale", nat:"Germania", dob:"2006-06-03"},
+  {number:33, name:"Davide Bartesaghi", pos:"Terzino sinistro", nat:"Italia", dob:"2005-12-29"},
+  {number:24, name:"Zachary Athekame", pos:"Terzino destro", nat:"Svizzera", dob:"2004-12-13"},
+  {number:"-",name:"Kevin Zeroli", pos:"Centrocampista", nat:"Italia", dob:"2005-01-11"},
+  {number:"-",name:"Alphadjo Cissè", pos:"Trequartista", nat:"Italia", dob:"2006-10-22"},
+  {number:"-",name:"Francesco Camarda", pos:"Punta centrale", nat:"Italia", dob:"2008-03-10"},
+];
+
+let over22 = JSON.parse(JSON.stringify(initialOver22));
+let under22 = JSON.parse(JSON.stringify(initialUnder22));
+let uidCounter = 1000;
+over22.forEach(p=>p._id=uidCounter++);
+under22.forEach(p=>p._id=uidCounter++);
+
+// ---------- STORAGE ----------
+async function saveState(){
+  try{
+    await window.storage.set('milan-roster-2026-27', JSON.stringify({over22, under22, cutoffDate}), false);
+  }catch(e){ console.error('Storage error', e); }
+}
+async function loadState(){
+  try{
+    const res = await window.storage.get('milan-roster-2026-27', false);
+    if(res && res.value){
+      const data = JSON.parse(res.value);
+      over22 = data.over22 || over22;
+      under22 = data.under22 || under22;
+      cutoffDate = data.cutoffDate || cutoffDate;
+    }
+  }catch(e){ /* nothing stored yet */ }
+}
+
+// ---------- LOGIC ----------
+function ageAt(dobStr, refStr){
+  const dob = new Date(dobStr+"T00:00:00");
+  const ref = new Date(refStr+"T00:00:00");
+  let age = ref.getFullYear() - dob.getFullYear();
+  const m = ref.getMonth() - dob.getMonth();
+  if(m < 0 || (m===0 && ref.getDate() < dob.getDate())) age--;
+  return age;
+}
+function fmtDate(iso){
+  const [y,m,d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+
+function render(){
+  document.getElementById('cutoffInput').value = cutoffDate;
+
+  // sort over22 by category priority then keep insertion order otherwise
+  const over22Body = document.getElementById('over22Body');
+  over22Body.innerHTML = "";
+  over22.forEach(p=>{
+    const age = ageAt(p.dob, cutoffDate);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" value="${p.name}" onchange="updField(${p._id},false,'name',this.value)"></td>
+      <td><input type="text" value="${p.pos}" onchange="updField(${p._id},false,'pos',this.value)"></td>
+      <td><input type="text" value="${p.nat}" onchange="updField(${p._id},false,'nat',this.value)"></td>
+      <td><input type="date" value="${p.dob}" onchange="updField(${p._id},false,'dob',this.value)"></td>
+      <td class="age-badge">${age}</td>
+      <td>
+        <select onchange="updField(${p._id},false,'cat',this.value)">
+          <option value="libero" ${p.cat==='libero'?'selected':''}>Libero</option>
+          <option value="club" ${p.cat==='club'?'selected':''}>Formato nel club</option>
+          <option value="italia" ${p.cat==='italia'?'selected':''}>Formato in Italia</option>
+          <option value="fp" ${p.cat==='fp'?'selected':''}>Fuori progetto</option>
+        </select>
+      </td>
+      <td><button class="rm-btn" onclick="removePlayer(${p._id},false)" title="Rimuovi">×</button></td>
+    `;
+    over22Body.appendChild(tr);
+  });
+
+  const under22Body = document.getElementById('under22Body');
+  under22Body.innerHTML = "";
+  under22.forEach(p=>{
+    const age = ageAt(p.dob, cutoffDate);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" value="${p.name}" onchange="updField(${p._id},true,'name',this.value)"></td>
+      <td><input type="text" value="${p.pos}" onchange="updField(${p._id},true,'pos',this.value)"></td>
+      <td><input type="text" value="${p.nat}" onchange="updField(${p._id},true,'nat',this.value)"></td>
+      <td><input type="date" value="${p.dob}" onchange="updField(${p._id},true,'dob',this.value)"></td>
+      <td class="age-badge">${age}</td>
+      <td><button class="rm-btn" onclick="removePlayer(${p._id},true)" title="Rimuovi">×</button></td>
+    `;
+    under22Body.appendChild(tr);
+  });
+
+  document.getElementById('cnt-over22').textContent = over22.length + " calciatori";
+  document.getElementById('cnt-under22').textContent = under22.length + " calciatori";
+
+  // recompute: reclassify anyone whose age crossed the threshold based on cutoff
+  reclassifyByAge();
+
+  if(over22.length){
+    const avg = over22.reduce((sum,p)=>sum+ageAt(p.dob, cutoffDate),0) / over22.length;
+    document.getElementById('avgAge').textContent = "età media " + avg.toFixed(1);
+  } else {
+    document.getElementById('avgAge').textContent = "età media —";
+  }
+
+  computeDashboard();
+  saveState();
+}
+
+function reclassifyByAge(){
+  // Move players between over22/under22 arrays if editing dob/cutoff changed their status
+  const moveToUnder = [];
+  over22 = over22.filter(p=>{
+    if(ageAt(p.dob, cutoffDate) < 22){ moveToUnder.push({number:p.number,name:p.name,pos:p.pos,nat:p.nat,dob:p.dob,_id:p._id}); return false; }
+    return true;
+  });
+  const moveToOver = [];
+  under22 = under22.filter(p=>{
+    if(ageAt(p.dob, cutoffDate) >= 22){ moveToOver.push({number:p.number,name:p.name,pos:p.pos,nat:p.nat,dob:p.dob,cat:'libero',_id:p._id}); return false; }
+    return true;
+  });
+  under22 = under22.concat(moveToUnder);
+  over22 = over22.concat(moveToOver);
+}
+
+function computeDashboard(){
+  const active = over22.filter(p=>p.cat!=='fp');
+  const fuoriProgetto = over22.filter(p=>p.cat==='fp').length;
+  const libero = active.filter(p=>p.cat==='libero').length;
+  const club = active.filter(p=>p.cat==='club').length;
+  const italia = active.filter(p=>p.cat==='italia').length;
+  const tot = active.length;
+
+  setGauge('libero', libero, 17);
+  setGauge('club', club, 4);
+  setGauge('italia', italia, 4);
+  setGauge('tot', tot, 25);
+  document.getElementById('v-u22').textContent = under22.length;
+  document.getElementById('v-fp').textContent = fuoriProgetto;
+
+  document.getElementById('n-club').textContent = club < 4 ? `${4-club} slot vacanti (ammesso)` : "";
+  document.getElementById('n-italia').textContent = italia < 4 ? `${4-italia} slot vacanti (ammesso)` : "";
+
+  const problems = [];
+  if(libero > 17) problems.push(`i calciatori "Liberi" sono ${libero}, superano il tetto di 17: riclassificare o spostare ${libero-17} calciatori come "Fuori progetto".`);
+  if(club > 4) problems.push(`i "Formati nel club" sono ${club}, superano il tetto di 4.`);
+  if(italia > 4) problems.push(`i "Formati in Italia" sono ${italia}, superano il tetto di 4.`);
+  if(tot > 25) problems.push(`il totale in lista è ${tot}, superiore al limite di 25.`);
+
+  const alertBox = document.getElementById('alertBox');
+  const stamp = document.getElementById('stamp');
+  const stampStatus = document.getElementById('stampStatus');
+  const stampSub = document.getElementById('stampSub');
+
+  if(problems.length){
+    alertBox.classList.add('show');
+    document.getElementById('alertText').textContent = problems.join(' ');
+    stamp.classList.remove('ok'); stamp.classList.add('bad');
+    stampStatus.textContent = "Non conforme";
+    stampSub.textContent = "Tetto alle Rose";
+  } else {
+    alertBox.classList.remove('show');
+    stamp.classList.remove('bad'); stamp.classList.add('ok');
+    stampStatus.textContent = "Conforme";
+    stampSub.textContent = "Tetto alle Rose";
+  }
+}
+
+function setGauge(key, val, max){
+  document.getElementById('v-'+key).textContent = val;
+  const pct = Math.min(100, (val/max)*100);
+  document.getElementById('b-'+key).style.width = pct+"%";
+  const gauge = document.getElementById('g-'+key);
+  gauge.classList.remove('warn','bad');
+  if(val > max) gauge.classList.add('bad');
+  else if(val === max) gauge.classList.add('warn');
+}
+
+function updField(id, isUnder, field, value){
+  const arr = isUnder ? under22 : over22;
+  const p = arr.find(x=>x._id===id);
+  if(!p) return;
+  p[field] = value;
+  render();
+}
+
+function removePlayer(id, isUnder){
+  if(isUnder) under22 = under22.filter(p=>p._id!==id);
+  else over22 = over22.filter(p=>p._id!==id);
+  render();
+}
+
+function addPlayer(isUnder){
+  const prefix = isUnder ? 'addU' : 'add22';
+  const name = document.getElementById(prefix+'-name').value.trim();
+  const pos = document.getElementById(prefix+'-pos').value.trim();
+  const nat = document.getElementById(prefix+'-nat').value.trim();
+  const dob = document.getElementById(prefix+'-dob').value;
+  if(!name || !dob){ alert('Inserisci almeno nome e data di nascita.'); return; }
+  const newP = {number:"-", name, pos: pos||"—", nat: nat||"—", dob, _id: uidCounter++};
+  if(!isUnder) newP.cat = 'libero';
+  if(isUnder) under22.push(newP); else over22.push(newP);
+  document.getElementById(prefix+'-name').value = "";
+  document.getElementById(prefix+'-pos').value = "";
+  document.getElementById(prefix+'-nat').value = "";
+  document.getElementById(prefix+'-dob').value = "";
+  render();
+}
+
+function resetRoster(){
+  if(!confirm('Ripristinare la rosa iniziale? Le modifiche correnti andranno perse.')) return;
+  over22 = JSON.parse(JSON.stringify(initialOver22));
+  under22 = JSON.parse(JSON.stringify(initialUnder22));
+  over22.forEach(p=>p._id=uidCounter++);
+  under22.forEach(p=>p._id=uidCounter++);
+  cutoffDate = "2025-12-31";
+  render();
+}
+
+function exportJson(){
+  const data = JSON.stringify({over22, under22, cutoffDate}, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'lista-25-milan-2026-27.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJson(event){
+  const file = event.target.files[0];
+  const importAlert = document.getElementById('importAlert');
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!Array.isArray(data.over22) || !Array.isArray(data.under22)){
+        throw new Error('Struttura non valida: mancano le liste over22 o under22.');
+      }
+      // riassegna id univoci per evitare collisioni con quelli già presenti
+      over22 = data.over22.map(p => ({...p, _id: uidCounter++}));
+      under22 = data.under22.map(p => ({...p, _id: uidCounter++}));
+      cutoffDate = data.cutoffDate || cutoffDate;
+      render();
+      importAlert.textContent = `Importazione riuscita: ${over22.length} calciatori Over 22 e ${under22.length} Under 22 caricati da ${file.name}.`;
+      importAlert.classList.add('show');
+    }catch(err){
+      importAlert.style.borderLeftColor = 'var(--bad)';
+      importAlert.style.background = 'var(--bad-bg)';
+      importAlert.style.color = 'var(--bad)';
+      importAlert.textContent = `Importazione non riuscita: il file "${file.name}" non è nel formato corretto (${err.message}).`;
+      importAlert.classList.add('show');
+    }
+  };
+  reader.onerror = function(){
+    importAlert.style.borderLeftColor = 'var(--bad)';
+    importAlert.style.background = 'var(--bad-bg)';
+    importAlert.style.color = 'var(--bad)';
+    importAlert.textContent = `Impossibile leggere il file "${file.name}".`;
+    importAlert.classList.add('show');
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // consente di reimportare lo stesso file più volte
+}
+
+document.getElementById('cutoffInput').addEventListener('change', (e)=>{
+  cutoffDate = e.target.value;
+  render();
+});
+
+// ---------- INIT ----------
+(async function init(){
+  await loadState();
+  render();
+})();
+</script>
+</body>
+</html>
