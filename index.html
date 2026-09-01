@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista Ufficiale 25 — AC Milan 2026/27</title>
+<title>Lista Ufficiale 25 (Under 23) — AC Milan 2026/27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -409,8 +409,8 @@
       <h1 class="wordmark">Lista dei 25<small>AC Milan — Stagione Sportiva 2026/27</small></h1>
     </div>
     <div class="cutoff-box">
-      DATA DI RIFERIMENTO U22
-      <input type="date" id="cutoffInput" value="2025-12-31">
+      DATA DI RIFERIMENTO U23
+      <input type="date" id="cutoffInput" value="2026-12-31">
     </div>
   </div>
 </header>
@@ -434,19 +434,19 @@
     <div class="rules">
       <div class="rule-card">
         <div class="num">01 — Liberi</div>
-        <p>Fino a <strong>17</strong> calciatori Over 22, senza vincoli di provenienza.</p>
+        <p>Fino a <strong>17</strong> calciatori Over 23, senza vincoli di provenienza.</p>
       </div>
       <div class="rule-card">
         <div class="num">02 — Formati nel club</div>
-        <p>Almeno <strong>4</strong> Over 22 tesserati a titolo definitivo per il Milan tra i 15 e i 21 anni, per almeno 36 mesi anche non continuativi (o 3 stagioni intere). <em>Se il requisito non è raggiunto, gli slot restano vacanti.</em></p>
+        <p>Almeno <strong>4</strong> Over 23 tesserati a titolo definitivo per il Milan tra i 15 e i 21 anni, per almeno 36 mesi anche non continuativi (o 3 stagioni intere). <em>Se il requisito non è raggiunto, gli slot restano vacanti.</em></p>
       </div>
       <div class="rule-card">
         <div class="num">03 — Formati in Italia</div>
-        <p>Almeno <strong>4</strong> Over 22 tesserati a titolo definitivo per uno o più club italiani tra i 15 e i 21 anni, per almeno 36 mesi (anche non continuativi) o 3 stagioni intere. <em>Idem, slot vacanti se non raggiunto.</em></p>
+        <p>Almeno <strong>4</strong> Over 23 tesserati a titolo definitivo per uno o più club italiani tra i 15 e i 21 anni, per almeno 36 mesi (anche non continuativi) o 3 stagioni intere. <em>Idem, slot vacanti se non raggiunto.</em></p>
       </div>
       <div class="rule-card">
-        <div class="num">04 — Under 22 e seconda squadra</div>
-        <p>Gli Under 22 si aggregano senza limite numerico e a prescindere dal loro status formativo. I convocati in lista Milan Futuro non devono superare le 50 presenze in Serie A con la prima squadra.</p>
+        <div class="num">04 — Under 23 e seconda squadra</div>
+        <p>Gli Under 23 si aggregano senza limite numerico e a prescindere dal loro status formativo. I convocati in lista Milan Futuro non devono superare le 50 presenze in Serie A con la prima squadra.</p>
       </div>
     </div>
   </section>
@@ -458,7 +458,7 @@
     </div>
     <div class="gauges">
       <div class="gauge" id="g-libero">
-        <div class="label">Liberi (Over 22)</div>
+        <div class="label">Liberi (Over 23)</div>
         <div class="value"><span id="v-libero">0</span><span class="of">/17</span></div>
         <div class="bar"><i id="b-libero" style="width:0%"></i></div>
       </div>
@@ -480,8 +480,8 @@
         <div class="bar"><i id="b-tot" style="width:0%"></i></div>
       </div>
       <div class="gauge">
-        <div class="label">Under 22 aggregati</div>
-        <div class="value"><span id="v-u22">0</span><span class="of">senza limite</span></div>
+        <div class="label">Under 23 aggregati</div>
+        <div class="value"><span id="v-u23">0</span><span class="of">senza limite</span></div>
       </div>
       <div class="gauge">
         <div class="label">Fuori progetto / non in lista</div>
@@ -493,13 +493,13 @@
 
   <section class="section">
     <div class="section-head">
-      <h2>Rosa Over 22 <span class="tag" id="avgAge" style="font-family:var(--font-mono);font-size:12px;text-transform:none;letter-spacing:normal;color:var(--slate);margin-left:8px;">età media —</span></h2>
+      <h2>Rosa Over 23 <span class="tag" id="avgAge" style="font-family:var(--font-mono);font-size:12px;text-transform:none;letter-spacing:normal;color:var(--slate);margin-left:8px;">età media —</span></h2>
       <span class="tag">categoria assegnabile per ciascun calciatore</span>
     </div>
 
     <div class="zone">
-      <div class="zone-title">Over 22 <span class="count" id="cnt-over22">0 calciatori</span></div>
-      <table class="roster" id="tblOver22">
+      <div class="zone-title">Over 23 <span class="count" id="cnt-over23">0 calciatori</span></div>
+      <table class="roster" id="tblOver23">
         <thead>
           <tr>
             <th>Calciatore</th>
@@ -511,13 +511,13 @@
             <th style="width:30px"></th>
           </tr>
         </thead>
-        <tbody id="over22Body"></tbody>
+        <tbody id="over23Body"></tbody>
       </table>
       <div class="add-row">
-        <input class="name" placeholder="Nome calciatore" id="add22-name">
-        <input class="pos" placeholder="Ruolo" id="add22-pos">
-        <input class="nat" placeholder="Nazionalità" id="add22-nat">
-        <input class="dob" type="date" id="add22-dob">
+        <input class="name" placeholder="Nome calciatore" id="add23-name">
+        <input class="pos" placeholder="Ruolo" id="add23-pos">
+        <input class="nat" placeholder="Nazionalità" id="add23-nat">
+        <input class="dob" type="date" id="add23-dob">
         <button class="add-btn" onclick="addPlayer(false)">+ Aggiungi</button>
       </div>
     </div>
@@ -525,12 +525,12 @@
 
   <section class="section">
     <div class="section-head">
-      <h2>Rosa aggiuntiva Under 22</h2>
+      <h2>Rosa aggiuntiva Under 23</h2>
       <span class="tag">nessun limite numerico, aggregabile in ogni momento</span>
     </div>
     <div class="zone">
-      <div class="zone-title">Under 22 <span class="count" id="cnt-under22">0 calciatori</span></div>
-      <table class="roster" id="tblUnder22">
+      <div class="zone-title">Under 23 <span class="count" id="cnt-under23">0 calciatori</span></div>
+      <table class="roster" id="tblUnder23">
         <thead>
           <tr>
             <th>Calciatore</th>
@@ -541,7 +541,7 @@
             <th style="width:30px"></th>
           </tr>
         </thead>
-        <tbody id="under22Body"></tbody>
+        <tbody id="under23Body"></tbody>
       </table>
       <div class="add-row">
         <input class="name" placeholder="Nome calciatore" id="addU-name">
@@ -562,7 +562,7 @@
   <div class="alert" id="importAlert" style="border-left-color:var(--ok);background:var(--ok-bg);color:var(--ok);"></div>
 
   <div class="disclaimer">
-    <strong>Nota metodologica.</strong> I dati anagrafici (numero, ruolo, data di nascita, nazionalità) sono tratti dalla rosa AC Milan stagione 2026/27 pubblicata su Transfermarkt. La qualifica di "formato nel club" o "formato in Italia" richiede la verifica puntuale della storia dei tesseramenti (36 mesi anche non continuativi, o tre intere stagioni sportive, tra i 15 e i 21 anni), dato non sempre desumibile da fonti aperte: le assegnazioni precompilate (Gabbia formato nel vivaio rossonero; De Winter, Ricci e Pietro Terracciano formati in club italiani diversi dal Milan; Filippo Terracciano, Bennacer e Bondo fuori progetto) vanno confermate sui tesseramenti FIGC effettivi prima dell'invio dell'elenco alla Lega. Ogni calciatore è riassegnabile in qualsiasi momento tramite il menu a tendina "Categoria". Anche se non specificamente indicato nel regolamento, per prassi ogni U22 finisce a prescindere tra gli U22 e non tra i formati nel club o in Italia (in questi panieri ci finiscono soltanto gli over 22).
+    <strong>Nota metodologica.</strong> I dati anagrafici (numero, ruolo, data di nascita, nazionalità) sono tratti dalla rosa AC Milan stagione 2026/27 pubblicata su Transfermarkt. La qualifica di "formato nel club" o "formato in Italia" richiede la verifica puntuale della storia dei tesseramenti (36 mesi anche non continuativi, o tre intere stagioni sportive, tra i 15 e i 21 anni), dato non sempre desumibile da fonti aperte: le assegnazioni precompilate (Gabbia formato nel vivaio rossonero; De Winter, Ricci e Pietro Terracciano formati in club italiani diversi dal Milan; Filippo Terracciano, Bennacer e Bondo fuori progetto) vanno confermate sui tesseramenti FIGC effettivi prima dell'invio dell'elenco alla Lega. Ogni calciatore è riassegnabile in qualsiasi momento tramite il menu a tendina "Categoria". Anche se non specificamente indicato nel regolamento, per prassi ogni U23 finisce a prescindere tra gli U23 e non tra i formati nel club o in Italia (in questi panieri ci finiscono soltanto gli over 23).
   </div>
 
   </div><!-- /viewSerieA -->
@@ -665,7 +665,7 @@
   </section>
 
   <div class="disclaimer">
-    <strong>Nota metodologica UEFA.</strong> Le categorie "club-trained" e "association-trained" seguono lo stesso schema 15-21 anni / 36 mesi già impiegato per il Tetto alle Rose italiano, ma vanno verificate separatamente: un calciatore può essere formato nel club ai fini FIGC e non esserlo ai fini UEFA se, per esempio, ha cambiato squadra tra i 15 e i 21 anni restando comunque nella stessa federazione. Il requisito di continuità di tesseramento per la List B non è calcolato automaticamente dallo strumento: la spunta "List B" è manuale e va impostata caso per caso sulla base dei tesseramenti effettivi. A differenza degli Under 22 del Tetto alle Rose, che sono esclusi dai panieri "formati" in modo automatico e non negoziabile in base alla sola data di nascita, l'assegnazione a List B in ambito UEFA non è un vincolo di sistema: un calciatore giovane e idoneo può essere iscritto direttamente in List A, dove spesso conviene inserirlo proprio per riempire la quota obbligatoria di club-trained o association-trained senza consumare uno dei 17 slot liberi. La spunta "List B" in questo strumento riflette quindi una scelta strategica del club che va valutata caso per caso, non un automatismo regolamentare. Lo strumento verifica solo la composizione numerica della lista, non le finestre temporali di deposito: i depositi di List A sono scaglionati per turno di qualificazione, play-off e fase campionato, e sono ammesse sostituzioni straordinarie per infortunio lungo (portiere: 30 giorni; giocatore di movimento: 60 giorni, massimo uno) o per cessione di portieri dopo la giornata 6. Nessuna di queste scadenze o sostituzioni è modellizzata nel calcolo di conformità qui sopra.
+    <strong>Nota metodologica UEFA.</strong> Le categorie "club-trained" e "association-trained" seguono lo stesso schema 15-21 anni / 36 mesi già impiegato per il Tetto alle Rose italiano, ma vanno verificate separatamente: un calciatore può essere formato nel club ai fini FIGC e non esserlo ai fini UEFA se, per esempio, ha cambiato squadra tra i 15 e i 21 anni restando comunque nella stessa federazione. Il requisito di continuità di tesseramento per la List B non è calcolato automaticamente dallo strumento: la spunta "List B" è manuale e va impostata caso per caso sulla base dei tesseramenti effettivi. A differenza degli Under 23 del Tetto alle Rose, che sono esclusi dai panieri "formati" in modo automatico e non negoziabile in base alla sola data di nascita, l'assegnazione a List B in ambito UEFA non è un vincolo di sistema: un calciatore giovane e idoneo può essere iscritto direttamente in List A, dove spesso conviene inserirlo proprio per riempire la quota obbligatoria di club-trained o association-trained senza consumare uno dei 17 slot liberi. La spunta "List B" in questo strumento riflette quindi una scelta strategica del club che va valutata caso per caso, non un automatismo regolamentare. Lo strumento verifica solo la composizione numerica della lista, non le finestre temporali di deposito: i depositi di List A sono scaglionati per turno di qualificazione, play-off e fase campionato, e sono ammesse sostituzioni straordinarie per infortunio lungo (portiere: 30 giorni; giocatore di movimento: 60 giorni, massimo uno) o per cessione di portieri dopo la giornata 6. Nessuna di queste scadenze o sostituzioni è modellizzata nel calcolo di conformità qui sopra.
   </div>
 
   </div><!-- /viewUEFA -->
@@ -674,12 +674,12 @@
 
 <script>
 // ---------- DATA MODEL ----------
-let cutoffDate = "2025-12-31";
+let cutoffDate = "2026-12-31";
 let currentView = "serieA";
 let serieAConforme = true;
 let uefaConforme = true;
 
-const initialOver22 = [
+const initialOver23 = [
   {number:16, name:"Mike Maignan", pos:"Portiere", nat:"Francia", dob:"1995-07-03", cat:"libero", uefaCat:"libero", uefaListB:false},
   {number:1,  name:"Pietro Terracciano", pos:"Portiere", nat:"Italia", dob:"1990-03-08", cat:"italia", uefaCat:"association", uefaListB:false},
   {number:31, name:"Strahinja Pavlović", pos:"Difensore centrale", nat:"Serbia", dob:"2001-05-24", cat:"libero", uefaCat:"libero", uefaListB:false},
@@ -705,7 +705,7 @@ const initialOver22 = [
   {number:7,  name:"Santiago Gimenez", pos:"Punta centrale", nat:"Messico", dob:"2001-04-18", cat:"libero", uefaCat:"libero", uefaListB:false},
 ];
 
-const initialUnder22 = [
+const initialUnder23 = [
   {number:96, name:"Lorenzo Torriani", pos:"Portiere", nat:"Italia", dob:"2005-01-31", uefaCat:"libero", uefaListB:false},
   {number:27, name:"David Odogu", pos:"Difensore centrale", nat:"Germania", dob:"2006-06-03", uefaCat:"libero", uefaListB:false},
   {number:33, name:"Davide Bartesaghi", pos:"Terzino sinistro", nat:"Italia", dob:"2005-12-29", uefaCat:"libero", uefaListB:false},
@@ -715,25 +715,25 @@ const initialUnder22 = [
   {number:"-",name:"Francesco Camarda", pos:"Punta centrale", nat:"Italia", dob:"2008-03-10", uefaCat:"libero", uefaListB:false},
 ];
 
-let over22 = JSON.parse(JSON.stringify(initialOver22));
-let under22 = JSON.parse(JSON.stringify(initialUnder22));
+let over23 = JSON.parse(JSON.stringify(initialOver23));
+let under23 = JSON.parse(JSON.stringify(initialUnder23));
 let uidCounter = 1000;
-over22.forEach(p=>p._id=uidCounter++);
-under22.forEach(p=>p._id=uidCounter++);
+over23.forEach(p=>p._id=uidCounter++);
+under23.forEach(p=>p._id=uidCounter++);
 
 // ---------- STORAGE ----------
 async function saveState(){
   try{
-    await window.storage.set('milan-roster-2026-27', JSON.stringify({over22, under22, cutoffDate}), false);
+    await window.storage.set('milan-roster-2026-27-u23', JSON.stringify({over23, under23, cutoffDate}), false);
   }catch(e){ console.error('Storage error', e); }
 }
 async function loadState(){
   try{
-    const res = await window.storage.get('milan-roster-2026-27', false);
+    const res = await window.storage.get('milan-roster-2026-27-u23', false);
     if(res && res.value){
       const data = JSON.parse(res.value);
-      over22 = data.over22 || over22;
-      under22 = data.under22 || under22;
+      over23 = data.over23 || data.over22 || over23;
+      under23 = data.under23 || data.under22 || under23;
       cutoffDate = data.cutoffDate || cutoffDate;
     }
   }catch(e){ /* nothing stored yet */ }
@@ -741,20 +741,22 @@ async function loadState(){
 
 // ---------- LOGIC ----------
 function ageAt(dobStr, refStr){
+  if(!dobStr || !refStr) return 0;
   const dob = new Date(dobStr+"T00:00:00");
   const ref = new Date(refStr+"T00:00:00");
+  if(isNaN(dob.getTime()) || isNaN(ref.getTime())) return 0;
   let age = ref.getFullYear() - dob.getFullYear();
   const m = ref.getMonth() - dob.getMonth();
   if(m < 0 || (m===0 && ref.getDate() < dob.getDate())) age--;
   return age;
 }
 function fmtDate(iso){
+  if(!iso) return "";
   const [y,m,d] = iso.split("-");
   return `${d}/${m}/${y}`;
 }
 
-// Ordine di reparto standard: portieri, difensori, terzini, mediani/centrocampisti,
-// esterni, trequartisti, ali, punte. Ruoli non riconosciuti finiscono in coda.
+// Ordine di reparto standard
 function positionRank(pos){
   const p = (pos || "").toLowerCase();
   if(p.includes("portiere")) return 0;
@@ -776,14 +778,15 @@ function positionRank(pos){
 function render(){
   document.getElementById('cutoffInput').value = cutoffDate;
 
-  // raggruppa i calciatori per reparto (portieri, difensori, centrocampisti, attaccanti...)
-  over22.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
-  under22.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+  // recompute: reclassify anyone whose age crossed the threshold based on cutoff
+  reclassifyByAge();
 
-  // sort over22 by category priority then keep insertion order otherwise
-  const over22Body = document.getElementById('over22Body');
-  over22Body.innerHTML = "";
-  over22.forEach(p=>{
+  over23.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+  under23.sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+
+  const over23Body = document.getElementById('over23Body');
+  over23Body.innerHTML = "";
+  over23.forEach(p=>{
     const age = ageAt(p.dob, cutoffDate);
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -802,12 +805,12 @@ function render(){
       </td>
       <td><button class="rm-btn" onclick="removePlayer(${p._id},false)" title="Rimuovi">×</button></td>
     `;
-    over22Body.appendChild(tr);
+    over23Body.appendChild(tr);
   });
 
-  const under22Body = document.getElementById('under22Body');
-  under22Body.innerHTML = "";
-  under22.forEach(p=>{
+  const under23Body = document.getElementById('under23Body');
+  under23Body.innerHTML = "";
+  under23.forEach(p=>{
     const age = ageAt(p.dob, cutoffDate);
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -818,17 +821,14 @@ function render(){
       <td class="age-badge">${age}</td>
       <td><button class="rm-btn" onclick="removePlayer(${p._id},true)" title="Rimuovi">×</button></td>
     `;
-    under22Body.appendChild(tr);
+    under23Body.appendChild(tr);
   });
 
-  document.getElementById('cnt-over22').textContent = over22.length + " calciatori";
-  document.getElementById('cnt-under22').textContent = under22.length + " calciatori";
+  document.getElementById('cnt-over23').textContent = over23.length + " calciatori";
+  document.getElementById('cnt-under23').textContent = under23.length + " calciatori";
 
-  // recompute: reclassify anyone whose age crossed the threshold based on cutoff
-  reclassifyByAge();
-
-  if(over22.length){
-    const avg = over22.reduce((sum,p)=>sum+ageAt(p.dob, cutoffDate),0) / over22.length;
+  if(over23.length){
+    const avg = over23.reduce((sum,p)=>sum+ageAt(p.dob, cutoffDate),0) / over23.length;
     document.getElementById('avgAge').textContent = "età media " + avg.toFixed(1);
   } else {
     document.getElementById('avgAge').textContent = "età media —";
@@ -840,24 +840,24 @@ function render(){
 }
 
 function reclassifyByAge(){
-  // Move players between over22/under22 arrays if editing dob/cutoff changed their status
+  // Move players between over23/under23 arrays if editing dob/cutoff changed their status
   const moveToUnder = [];
-  over22 = over22.filter(p=>{
-    if(ageAt(p.dob, cutoffDate) < 22){ moveToUnder.push({...p}); return false; }
+  over23 = over23.filter(p=>{
+    if(ageAt(p.dob, cutoffDate) < 23){ moveToUnder.push({...p}); return false; }
     return true;
   });
   const moveToOver = [];
-  under22 = under22.filter(p=>{
-    if(ageAt(p.dob, cutoffDate) >= 22){ moveToOver.push({...p, cat: p.cat || 'libero'}); return false; }
+  under23 = under23.filter(p=>{
+    if(ageAt(p.dob, cutoffDate) >= 23){ moveToOver.push({...p, cat: p.cat || 'libero'}); return false; }
     return true;
   });
-  under22 = under22.concat(moveToUnder);
-  over22 = over22.concat(moveToOver);
+  under23 = under23.concat(moveToUnder);
+  over23 = over23.concat(moveToOver);
 }
 
 function computeDashboard(){
-  const active = over22.filter(p=>p.cat!=='fp');
-  const fuoriProgetto = over22.filter(p=>p.cat==='fp').length;
+  const active = over23.filter(p=>p.cat!=='fp');
+  const fuoriProgetto = over23.filter(p=>p.cat==='fp').length;
   const libero = active.filter(p=>p.cat==='libero').length;
   const club = active.filter(p=>p.cat==='club').length;
   const italia = active.filter(p=>p.cat==='italia').length;
@@ -867,7 +867,7 @@ function computeDashboard(){
   setGauge('club', club, 4);
   setGauge('italia', italia, 4);
   setGauge('tot', tot, 25);
-  document.getElementById('v-u22').textContent = under22.length;
+  document.getElementById('v-u23').textContent = under23.length;
   document.getElementById('v-fp').textContent = fuoriProgetto;
 
   document.getElementById('n-club').textContent = club < 4 ? `${4-club} slot vacanti (ammesso)` : "";
@@ -938,7 +938,7 @@ function switchView(view){
 }
 
 function renderUEFA(){
-  const combined = over22.concat(under22).sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
+  const combined = over23.concat(under23).sort((a,b)=> positionRank(a.pos) - positionRank(b.pos));
   const body = document.getElementById('uefaBody');
   body.innerHTML = "";
   combined.forEach(p=>{
@@ -1029,7 +1029,7 @@ function setGaugeUefa(key, val, max){
 }
 
 function updUefaField(id, field, value){
-  let p = over22.find(x=>x._id===id) || under22.find(x=>x._id===id);
+  let p = over23.find(x=>x._id===id) || under23.find(x=>x._id===id);
   if(!p) return;
   p[field] = value;
   renderUEFA();
@@ -1037,7 +1037,7 @@ function updUefaField(id, field, value){
 }
 
 function updField(id, isUnder, field, value){
-  const arr = isUnder ? under22 : over22;
+  const arr = isUnder ? under23 : over23;
   const p = arr.find(x=>x._id===id);
   if(!p) return;
   p[field] = value;
@@ -1045,13 +1045,13 @@ function updField(id, isUnder, field, value){
 }
 
 function removePlayer(id, isUnder){
-  if(isUnder) under22 = under22.filter(p=>p._id!==id);
-  else over22 = over22.filter(p=>p._id!==id);
+  if(isUnder) under23 = under23.filter(p=>p._id!==id);
+  else over23 = over23.filter(p=>p._id!==id);
   render();
 }
 
 function addPlayer(isUnder){
-  const prefix = isUnder ? 'addU' : 'add22';
+  const prefix = isUnder ? 'addU' : 'add23';
   const name = document.getElementById(prefix+'-name').value.trim();
   const pos = document.getElementById(prefix+'-pos').value.trim();
   const nat = document.getElementById(prefix+'-nat').value.trim();
@@ -1059,7 +1059,7 @@ function addPlayer(isUnder){
   if(!name || !dob){ alert('Inserisci almeno nome e data di nascita.'); return; }
   const newP = {number:"-", name, pos: pos||"—", nat: nat||"—", dob, _id: uidCounter++, uefaCat:"libero", uefaListB:false};
   if(!isUnder) newP.cat = 'libero';
-  if(isUnder) under22.push(newP); else over22.push(newP);
+  if(isUnder) under23.push(newP); else over23.push(newP);
   document.getElementById(prefix+'-name').value = "";
   document.getElementById(prefix+'-pos').value = "";
   document.getElementById(prefix+'-nat').value = "";
@@ -1069,20 +1069,20 @@ function addPlayer(isUnder){
 
 function resetRoster(){
   if(!confirm('Ripristinare la rosa iniziale? Le modifiche correnti andranno perse.')) return;
-  over22 = JSON.parse(JSON.stringify(initialOver22));
-  under22 = JSON.parse(JSON.stringify(initialUnder22));
-  over22.forEach(p=>p._id=uidCounter++);
-  under22.forEach(p=>p._id=uidCounter++);
-  cutoffDate = "2025-12-31";
+  over23 = JSON.parse(JSON.stringify(initialOver23));
+  under23 = JSON.parse(JSON.stringify(initialUnder23));
+  over23.forEach(p=>p._id=uidCounter++);
+  under23.forEach(p=>p._id=uidCounter++);
+  cutoffDate = "2026-12-31";
   render();
 }
 
 function exportJson(){
-  const data = JSON.stringify({over22, under22, cutoffDate}, null, 2);
+  const data = JSON.stringify({over23, under23, cutoffDate}, null, 2);
   const blob = new Blob([data], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'lista-25-milan-2026-27.json';
+  a.href = url; a.download = 'lista-25-milan-2026-27-u23.json';
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -1095,15 +1095,16 @@ function importJson(event){
   reader.onload = function(e){
     try{
       const data = JSON.parse(e.target.result);
-      if(!Array.isArray(data.over22) || !Array.isArray(data.under22)){
-        throw new Error('Struttura non valida: mancano le liste over22 o under22.');
+      const importedOver = data.over23 || data.over22;
+      const importedUnder = data.under23 || data.under22;
+      if(!Array.isArray(importedOver) || !Array.isArray(importedUnder)){
+        throw new Error('Struttura non valida: mancano le liste over23 o under23.');
       }
-      // riassegna id univoci per evitare collisioni con quelli già presenti
-      over22 = data.over22.map(p => ({...p, _id: uidCounter++}));
-      under22 = data.under22.map(p => ({...p, _id: uidCounter++}));
+      over23 = importedOver.map(p => ({...p, _id: uidCounter++}));
+      under23 = importedUnder.map(p => ({...p, _id: uidCounter++}));
       cutoffDate = data.cutoffDate || cutoffDate;
       render();
-      importAlert.textContent = `Importazione riuscita: ${over22.length} calciatori Over 22 e ${under22.length} Under 22 caricati da ${file.name}.`;
+      importAlert.textContent = `Importazione riuscita: ${over23.length} calciatori Over 23 e ${under23.length} Under 23 caricati da ${file.name}.`;
       importAlert.classList.add('show');
     }catch(err){
       importAlert.style.borderLeftColor = 'var(--bad)';
@@ -1121,7 +1122,7 @@ function importJson(event){
     importAlert.classList.add('show');
   };
   reader.readAsText(file);
-  event.target.value = ''; // consente di reimportare lo stesso file più volte
+  event.target.value = '';
 }
 
 document.getElementById('cutoffInput').addEventListener('change', (e)=>{
@@ -1141,7 +1142,6 @@ window.initApp = init;
 
     <!-- Script di Clerk per la protezione degli accessi -->
     <script>
-        // La tua Publishable Key
         const clerkPubKey = "pk_test_cnVsaW5nLW1heWZseS03MS5jbGVyay5hY2NvdW50cy5kZXYk";
 
         const script = document.createElement('script');
@@ -1178,20 +1178,17 @@ window.initApp = init;
                     dividerText: "oppure"
                 };
 
-                // Inizializzazione di Clerk con la localizzazione globale e i redirect globali
                 await window.Clerk.load({
                     localization: localizationObj,
                     signInForceRedirectUrl: window.location.href,
                     signUpForceRedirectUrl: window.location.href
                 });
 
-                // Listener per intercettare il login in tempo reale senza dover aspettare il reload
                 window.Clerk.addListener(function (state) {
                     if (state.user) {
                         document.getElementById('sign-in-container').style.display = 'none';
                         document.getElementById('app-content').style.display = 'block';
 
-                        // Inizializza l'app ora che il contenitore è visibile!
                         if (typeof window.initApp === 'function') {
                             window.initApp();
                         }
@@ -1199,16 +1196,13 @@ window.initApp = init;
                 });
 
                 if (window.Clerk.user) {
-                    // L'utente è autorizzato: nascondo il login e mostro il contenuto della web app
                     document.getElementById('sign-in-container').style.display = 'none';
                     document.getElementById('app-content').style.display = 'block';
 
-                    // Inizializza l'app ora che il contenitore è visibile!
                     if (typeof window.initApp === 'function') {
                         window.initApp();
                     }
                 } else {
-                    // L'utente NON è autorizzato: mostro il modulo di login nel div apposito
                     const signInDiv = document.getElementById('sign-in-container');
                     window.Clerk.mountSignIn(signInDiv, {
                         forceRedirectUrl: window.location.href,
